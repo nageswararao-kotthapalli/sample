@@ -1,1 +1,45 @@
-<h1>nageswararao</h1>
+  
+<p-table [value]="data" #dt [globalFilterFields]="['email']" [responsive]="true">
+  <!-- Search Filter In Table By title -->
+  <ng-template pTemplate="caption">
+      <div style="text-align: right">
+          <input type="text" pInputText size="50" placeholder="Search the table by email"
+              (input)="dt.filterGlobal($event.target.value, 'startsWith')" style="height:35px;padding-left: 25px;">
+      </div>
+  </ng-template>
+  <!-- Get Url Details Display In Table -->
+  <ng-template pTemplate="header">
+      <tr>
+          <th>Id</th>
+          <th>First_Name</th>
+          <th>Last_Name</th>
+          <th>Email </th>
+          <th>Avatar </th>
+
+
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-Results>
+      <tr (click)="RowData(Results)">
+          <td>{{Results.id}}</td>
+          <td>{{Results.first_name}}</td>
+          <td>{{Results.last_name}}</td>
+          <td>{{Results.email}}</td>
+          <td>{{Results.avatar}}</td>
+
+      </tr>
+  </ng-template>
+  
+  <ng-template pTemplate="emptymessage" style="text-align: right">
+
+    
+        <div [attr.colspan]="cols.length">No data found.</div>
+    
+</ng-template>
+</p-table>
+<!-- Model Popup Click Row Details Display -->
+<p-dialog header="Model Popup Row In The Table" [(visible)]="display" modal="true" [dismissableMask]="true">
+  {{Modeldata}}
+</p-dialog>
+
+
