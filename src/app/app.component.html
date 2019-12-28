@@ -31,5 +31,8 @@
 </p-table>
 <!-- Model Popup Click Row Details Display -->
 <p-dialog header="Selected Row RawData In The Table" [(visible)]="display" modal="true" [dismissableMask]="true">
-    {{selectedRow|json}}
+     {{selectedRow|json}}
+    <p-footer>
+        <button type="button" pButton icon="pi pi-close" (click)="display=false" label="No" class="ui-button-secondary">Cancel</button>
+    </p-footer>
 </p-dialog>
