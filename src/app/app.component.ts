@@ -1,31 +1,32 @@
 import { Component } from '@angular/core';
-import {HttpClient} from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'https://reqres.in/api/users';
-  Modeldata: string;
+  apiUrl = 'https://reqres.in/api/users';
+  
   display: boolean;
-  data;
-  constructor(private http:HttpClient){
+  data:[];
+  selectedRow: any;
+  constructor(private http: HttpClient) {
     this.getDetails();
-   const refresh = setInterval(()=>{
-    this.getDetails();
-   },10000);
+    setInterval(() => {
+      this.getDetails();
+    }, 10000);
   }
-  getDetails(){
-      this.http.get(this.title).subscribe(
-        res => { //qres.in/api/users Success
-           this.data = res['data']
+  getDetails() {
+    this.http.get(this.apiUrl).subscribe(
+      res => { //qres.in/api/users Success
+        this.data = res['data']
         console.log(res['data']);
-        }
-      );
+      }
+    );
   }
-  RowData(row) {
-    this.Modeldata = JSON.stringify(row);
+  selectRow(row) {
+    this.selectedRow = row;
     this.display = true;
   }
 }
